@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 58794a6a6e4e65a4b9de553ce4f2ac1a
+timeCreated: 1458832961
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - FadeImg: {fileID: 2800000, guid: 74a5bdf7fa1b2b540bfdf3e44f2a96c2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
