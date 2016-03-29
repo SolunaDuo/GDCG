@@ -7,7 +7,6 @@ using System.Collections.Generic;
 기능    : 텍스트를 읽어오는 스크립트
 */
 
-
 public class LTEXT : MonoBehaviour {
 
     private static List<string> ltext = null;
@@ -49,7 +48,6 @@ public class LTEXT : MonoBehaviour {
                 }
             }   
         }
-
         bInit = true;
     }
 
