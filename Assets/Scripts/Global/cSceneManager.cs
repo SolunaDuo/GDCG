@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 /*
 제작자  : 서형준
@@ -66,9 +65,9 @@ public class cSceneManager : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         if (!szSceneName.Equals(""))
-            SceneManager.LoadScene(szSceneName);
+            Application.LoadLevel(szSceneName);
         if(nSceneLevel >= 0 )
-            SceneManager.LoadScene(nSceneLevel);
+            Application.LoadLevel(nSceneLevel);
 
         fAlpha = 0.0f;
 
