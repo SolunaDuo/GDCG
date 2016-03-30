@@ -66,6 +66,7 @@ public class Sound : MonoBehaviour {
     {
         if (!BgmSound.isPlaying)
         {
+            BgmSound.clip = clips[(int)idx];
             BgmSound.loop = true;
             BgmSound.PlayOneShot(clips[(int)idx], volum);
         }
