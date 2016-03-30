@@ -854,6 +854,10 @@ Prefab:
       propertyPath: m_Name
       value: pf_MyEmployee (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 11455178, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
+      propertyPath: m_Text
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
   m_IsPrefabParent: 0
@@ -1254,8 +1258,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 153, y: -50}
-  m_SizeDelta: {x: 306, y: 100}
+  m_AnchoredPosition: {x: 153, y: -207}
+  m_SizeDelta: {x: 306, y: 688}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &816222025
 MonoBehaviour:
@@ -1635,6 +1639,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 11455178, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
+      propertyPath: m_Text
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
   m_IsPrefabParent: 0
@@ -1828,6 +1836,10 @@ Prefab:
     - target: {fileID: 124214, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
       propertyPath: m_Name
       value: pf_MyEmployee (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455178, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
+      propertyPath: m_Text
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
@@ -2134,7 +2146,7 @@ MonoBehaviour:
   m_Script: {fileID: -1200242548, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
+  m_ShowMaskGraphic: 0
 --- !u!114 &1715062044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2183,8 +2195,8 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.5
-  m_Inertia: 0
+  m_Elasticity: 0.1
+  m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
   m_Viewport: {fileID: 0}
@@ -2482,6 +2494,10 @@ Prefab:
       propertyPath: m_Name
       value: pf_MyEmployee (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 11455178, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
+      propertyPath: m_Text
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
   m_IsPrefabParent: 0
@@ -2652,6 +2668,10 @@ Prefab:
     - target: {fileID: 124214, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
       propertyPath: m_Name
       value: pf_MyEmployee (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455178, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
+      propertyPath: m_Text
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3caa3260465cbb546a1265b1b9b1e3ac, type: 2}
