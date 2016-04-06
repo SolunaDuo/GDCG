@@ -18,6 +18,9 @@ public class ST_GAME_INFO
     public int Rank;       // 게임 등급
     public int Taget;      // 타겟층
 
+    public ST_GAME_INFO()
+    {
+    }
     public ST_GAME_INFO(float st1, float st2, float st3, int money, int rank, int taget)
     {
         State1 = st1;

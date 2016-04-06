@@ -751,7 +751,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 874859751}
-  - {fileID: 1715062042}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
@@ -1395,7 +1394,7 @@ GameObject:
   - 222: {fileID: 651650602}
   - 114: {fileID: 651650601}
   m_Layer: 5
-  m_Name: T_HP
+  m_Name: T_Ability02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1795,6 +1794,7 @@ GameObject:
   - 224: {fileID: 874859751}
   - 222: {fileID: 874859753}
   - 114: {fileID: 874859752}
+  - 114: {fileID: 874859754}
   m_Layer: 5
   m_Name: P_EmployeeMgr
   m_TagString: Untagged
@@ -1814,11 +1814,12 @@ RectTransform:
   m_Children:
   - {fileID: 1635709679}
   - {fileID: 2096221398}
+  - {fileID: 1715062042}
   m_Father: {fileID: 476839419}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -18, y: 8}
+  m_AnchoredPosition: {x: -18, y: 0}
   m_SizeDelta: {x: -247, y: -243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &874859752
@@ -1854,6 +1855,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 874859750}
+--- !u!114 &874859754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 874859750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008a4cb2e4cdf9f4d87ef6b0aa71caeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfEmpItem: {fileID: 0}
+  panel_grid: {fileID: 0}
+  tName: {fileID: 1547573758}
+  tStates:
+  - {fileID: 484848278}
+  - {fileID: 1034985129}
+  - {fileID: 1745827097}
+  - {fileID: 651650601}
+  - {fileID: 2057781001}
 --- !u!1 &975911982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,7 +2049,7 @@ GameObject:
   - 222: {fileID: 1034985130}
   - 114: {fileID: 1034985129}
   m_Layer: 5
-  m_Name: T_HP
+  m_Name: T_Ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2668,11 +2689,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 816222024}
-  m_Father: {fileID: 476839419}
-  m_RootOrder: 1
+  m_Father: {fileID: 874859751}
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -357, y: -9}
+  m_AnchoredPosition: {x: -338.99997, y: -17}
   m_SizeDelta: {x: 306, y: 388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715062043
@@ -2762,7 +2783,7 @@ GameObject:
   - 222: {fileID: 1745827098}
   - 114: {fileID: 1745827097}
   m_Layer: 5
-  m_Name: T_HP
+  m_Name: T_Ingenuity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

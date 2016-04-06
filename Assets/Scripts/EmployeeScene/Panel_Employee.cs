@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 /*
 제작자  : 서형준
@@ -8,24 +9,21 @@ using System.Collections.Generic;
 기능    : 직원 관리 팝업 패널 스크립트.
 */
 
-struct MyEmployee
-{
-    public bool isActive;
-    public int     nNum; // 몇번째 인지 체크
 
-    public ST_EMPLOYEE_INFO StInfo;
-
-
-};
 
 public class Panel_Employee : MonoBehaviour {
     public static Panel_Employee instance = null;
 
-    List<MyEmployee> listMyEmployee;  // 직원 리스트
+    List<Employeeitems> listMyEmployee = new List<Employeeitems>();  // 직원 리스트
     public GameObject pfEmpItem;
 
     public GameObject panel_grid;   // 그리드 패널
-    
+
+    public Text tName;
+
+    public Text[] tStates;
+
+
 
     void Awake()
     {
@@ -33,7 +31,13 @@ public class Panel_Employee : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-	
+        // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
+        for(int i=0; i<10; ++i)
+        {
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f,0.0f,0.0f,0.0f,0,"");
+
+            SetMyEmployee(temp);
+        }
 	}
 	
 	// Update is called once per frame
@@ -41,19 +45,63 @@ public class Panel_Employee : MonoBehaviour {
 	
 	}
 
-    void SetMyEmployee(ST_EMPLOYEE_INFO temp)
+    public void SetMyEmployee(ST_EMPLOYEE_INFO temp,bool bact = false)
     {
-        MyEmployee Metemp = new MyEmployee();
+        Employeeitems Metemp = new Employeeitems();
         // Employee Setting
-        Metemp.isActive = true;
-        Metemp.nNum = listMyEmployee.Count;
+        Metemp.isActive = bact;
+        Metemp.nNum = listMyEmployee.Count+1;
         Metemp.StInfo = new ST_EMPLOYEE_INFO(temp);
         // 프리팹 만들어줌
-        GameObject tempobj = (GameObject)Instantiate(pfEmpItem);
-        tempobj.transform.parent = panel_grid.transform;
+        if (!bact)
+        {
+            GameObject tempobj = (GameObject)Instantiate(pfEmpItem);
+            tempobj.GetComponent<Employeeitems>().SetMyInfo(Metemp);
+            tempobj.transform.parent = panel_grid.transform;
+            tempobj.transform.localScale = Vector3.one;
+            tempobj.transform.localPosition = Vector3.one;
+            listMyEmployee.Add(Metemp);
+        }
+        else
+        {
+            for(int i=0; i< listMyEmployee.Count; ++i)
+            {
+                if (!listMyEmployee[i].isActive)
+                    listMyEmployee[i].SetMyInfo(Metemp);
+            }
+        }
 
         //패널 크기 세팅 필요
 
-        listMyEmployee.Add(Metemp);
+        //
+    }
+
+    public void DeleteEmployee(ST_EMPLOYEE_INFO temp)
+    {
+        for(int i=0; i< listMyEmployee.Count;++i)
+        {
+            if (listMyEmployee[i].isActive)
+            {
+                if (temp.Name.Equals(listMyEmployee[i].StInfo.Name))
+                {
+                    listMyEmployee[i].isActive = false;
+                    listMyEmployee.Remove(listMyEmployee[i]);
+                }
+            }
+            else
+                continue;
+        }
+    }
+
+    public void ShowInfo(Employeeitems temp)
+    {
+        tName.text = temp.StInfo.Name;
+
+        tStates[0].text = temp.StInfo.State1.ToString();
+        tStates[1].text = temp.StInfo.State2.ToString();
+        tStates[2].text = temp.StInfo.State3.ToString();
+        tStates[3].text = temp.StInfo.State4.ToString();
+
+        tStates[4].text = temp.StInfo.Money.ToString();
     }
 }
