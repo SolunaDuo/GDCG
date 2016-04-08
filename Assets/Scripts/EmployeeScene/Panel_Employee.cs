@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 
 public class Panel_Employee : Singleton<Panel_Employee> {
-    //public static Panel_Employee instance = null;
+   // public static Panel_Employee instance = null;
 
     List<Employeeitems> listMyEmployee = new List<Employeeitems>();  // 직원 리스트
     public GameObject pfEmpItem;
@@ -34,7 +34,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
     void Awake()
     {
-        //instance = this;
+       // instance = this;
     }
 	// Use this for initialization
 	void Start () {

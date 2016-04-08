@@ -2,6 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/*
+제작자  : 서형준
+만든 날 : 2016-03-31
+기능    : 직원 관리 팝업 패널 스크립트.
+*/
+
 public class Employeeitems : MonoBehaviour {
 
     public bool isActive;
@@ -23,6 +29,9 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnClick()
     {
-        Panel_Employee.instance.ShowInfo(this.GetComponent<Employeeitems>());
+        //if(isActive)
+         //Panel_Employee..ShowInfo(this.GetComponent<Employeeitems>());
+        //else
+            // 직원 뽑는 팝업 생성
     }
 }
