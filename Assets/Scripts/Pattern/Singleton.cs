@@ -3,27 +3,22 @@ using System.Collections;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour, new()
 {
-    protected static T instance;
+    protected static T pInstance;
 
-    public void CreateInstance()
+    public T instance
     {
-        if ( instance == null )
+        get
         {
-            GameObject ins = new GameObject( typeof( T ).Name );
-        }
-    }
-
-    public static T get()
-    {
-        if ( instance == null )
-        {
-            instance = FindObjectOfType<T>();
-            if ( instance == null )
+            if ( pInstance == null )
             {
-                GameObject ins = new GameObject( typeof( T ).Name );
+                pInstance = FindObjectOfType<T>();
+                if ( pInstance == null )
+                {
+                    pInstance = new GameObject( typeof( T ).Name ).AddComponent<T>();
+                }
             }
-        }
 
-        return instance;
+            return pInstance;
+        }
     }
 }

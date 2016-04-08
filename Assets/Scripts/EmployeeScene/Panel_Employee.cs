@@ -11,8 +11,8 @@ using UnityEngine.UI;
 
 
 
-public class Panel_Employee : MonoBehaviour {
-    public static Panel_Employee instance = null;
+public class Panel_Employee : Singleton<Panel_Employee> {
+    //public static Panel_Employee instance = null;
 
     List<Employeeitems> listMyEmployee = new List<Employeeitems>();  // 직원 리스트
     public GameObject pfEmpItem;
@@ -24,10 +24,17 @@ public class Panel_Employee : MonoBehaviour {
     public Text[] tStates;
 
 
+    // 코드 위치는 보기 좋은곳으로...
+    public Employeeitems GetEmployee( int index )
+    {
+        return listMyEmployee[ index ];
+    }
+    // 코드 위치는 보기 좋은곳으로...
+
 
     void Awake()
     {
-        instance = this;
+        //instance = this;
     }
 	// Use this for initialization
 	void Start () {
