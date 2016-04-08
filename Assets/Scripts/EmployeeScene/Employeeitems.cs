@@ -9,7 +9,7 @@ public class Employeeitems : MonoBehaviour {
 
     public ST_EMPLOYEE_INFO StInfo;
 
-    private Text tRank;
+    public Text tRank;
 
     public void SetMyInfo(Employeeitems temp)
     {
@@ -23,6 +23,6 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnClick()
     {
-        
+        Panel_Employee.instance.ShowInfo(this.GetComponent<Employeeitems>());
     }
 }
