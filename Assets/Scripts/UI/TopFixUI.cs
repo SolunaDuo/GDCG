@@ -4,7 +4,6 @@ using System.Collections;
 
 public class TopFixUI : MonoBehaviour
 {
-    private Button charButton;
     private Button exitButton;
     private Button settingButton;
 
