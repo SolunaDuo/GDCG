@@ -30,7 +30,7 @@ public class Employeeitems : MonoBehaviour {
     public void OnClick()
     {
         //if(isActive)
-         //Panel_Employee..ShowInfo(this.GetComponent<Employeeitems>());
+         Panel_Employee.instance.ShowInfo(this.GetComponent<Employeeitems>());
         //else
             // 직원 뽑는 팝업 생성
     }

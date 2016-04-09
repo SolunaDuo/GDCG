@@ -5,7 +5,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour, new()
 {
     protected static T pInstance;
 
-    public T instance
+    public static T instance
     {
         get
         {

@@ -23,6 +23,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
     public Text[] tStates;
 
+    
 
     // 코드 위치는 보기 좋은곳으로...
     public Employeeitems GetEmployee( int index )
@@ -34,7 +35,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
     void Awake()
     {
-       // instance = this;
+    //    instance = this;
     }
 	// Use this for initialization
 	void Start () {
