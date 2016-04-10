@@ -14,8 +14,7 @@ public enum SOUNDIDX
     S_MAX = 0
 }
 
-public class Sound : MonoBehaviour {
-    public static Sound instance = null;
+public class Sound : Singleton<Sound> {
 
     private float volum = 0.0f;
 
@@ -27,7 +26,6 @@ public class Sound : MonoBehaviour {
 
     void Awake()
     {
-        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 	// Use this for initialization

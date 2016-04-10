@@ -9,11 +9,9 @@ using UnityEngine.UI;
           필요하시면 더 추가해 주세요.
 */
 
-public class CoroutineManager : MonoBehaviour {
-	public static CoroutineManager instance;
+public class CoroutineManager : Singleton<CoroutineManager> {
 	// Use this for initialization
 	void Awake () {
-		instance = this;
 		DontDestroyOnLoad (gameObject);
 	}
 
