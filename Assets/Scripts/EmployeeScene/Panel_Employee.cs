@@ -24,6 +24,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     public Text[] tStates;
 
     public RectTransform tr_Grid;
+    private float fItemHegit = -100f;
 
     // 코드 위치는 보기 좋은곳으로...
     public Employeeitems GetEmployee( int index )
@@ -46,11 +47,12 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
             SetMyEmployee(temp);
         }
+        gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     public void SetMyEmployee(ST_EMPLOYEE_INFO temp,bool bact = false)
@@ -71,10 +73,9 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             listMyEmployee.Add(Metemp);
 
             //패널 크기 세팅 필요
-            tr_Grid.GetComponent<Rect> = 1000.0f;
+            tr_Grid.anchoredPosition = new Vector2(0.0f, (fItemHegit * listMyEmployee.Count) /2f);
+            tr_Grid.sizeDelta = new Vector2(0.0f, Mathf.Abs( (fItemHegit * listMyEmployee.Count)));
             //
-
-
         }
         else
         {
