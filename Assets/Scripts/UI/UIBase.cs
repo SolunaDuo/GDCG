@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
+using System;
 
-public class UIBase : MonoBehaviour
+public class UIBase : MonoBehaviour, IPointerClickHandler
 {
+    public virtual void OnPointerClick( PointerEventData eventData )
+    {
+        
+    }
+
     protected void AddListener( Button button, UnityEngine.Events.UnityAction action )
     {
         button.onClick.AddListener( action );
