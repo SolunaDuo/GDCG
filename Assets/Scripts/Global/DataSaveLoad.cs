@@ -13,12 +13,10 @@ using System.IO;
 기능    : 데이터 저장,로드하는 스크립트.
 */
 
-public class DataSaveLoad : MonoBehaviour {
-    private static DataSaveLoad instance = null;
+public class DataSaveLoad : Singleton<DataSaveLoad> {
 
     void Awake()
     {
-        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 

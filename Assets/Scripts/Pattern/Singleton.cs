@@ -14,7 +14,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour, new()
                 pInstance = FindObjectOfType<T>();
                 if ( pInstance == null )
                 {
-                    pInstance = new GameObject( typeof( T ).Name ).AddComponent<T>();
+                    //pInstance = new GameObject( typeof( T ).Name ).AddComponent<T>();
+                    pInstance = Camera.main.gameObject.AddComponent<T>();
                 }
             }
 

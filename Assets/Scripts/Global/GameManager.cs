@@ -9,8 +9,7 @@ public struct ST_GENRE
     public int Money;
 }
 
-public class GameManager : MonoBehaviour {
-    public static GameManager instance = null;
+public class GameManager : Singleton<GameManager> {
 
     List<ST_GENRE> listGenre = new List<ST_GENRE>();
 
@@ -18,7 +17,7 @@ public class GameManager : MonoBehaviour {
     private TextAsset jsonData;
     void Awake()
     {
-        instance = this;
+
     }
 
     // Use this for initialization
