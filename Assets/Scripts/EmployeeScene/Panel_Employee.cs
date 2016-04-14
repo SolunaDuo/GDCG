@@ -23,7 +23,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
     public Text[] tStates;
 
-    
+    public RectTransform tr_Grid;
 
     // 코드 위치는 보기 좋은곳으로...
     public Employeeitems GetEmployee( int index )
@@ -40,7 +40,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 	// Use this for initialization
 	void Start () {
         // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
-        for(int i=0; i<10; ++i)
+        for (int i=0; i<10; ++i)
         {
             ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f,0.0f,0.0f,0.0f,0,"");
 
@@ -69,6 +69,12 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             tempobj.transform.localScale = Vector3.one;
             tempobj.transform.localPosition = Vector3.one;
             listMyEmployee.Add(Metemp);
+
+            //패널 크기 세팅 필요
+            tr_Grid.GetComponent<Rect> = 1000.0f;
+            //
+
+
         }
         else
         {
@@ -78,10 +84,6 @@ public class Panel_Employee : Singleton<Panel_Employee> {
                     listMyEmployee[i].SetMyInfo(Metemp);
             }
         }
-
-        //패널 크기 세팅 필요
-
-        //
     }
 
     public void DeleteEmployee(ST_EMPLOYEE_INFO temp)
