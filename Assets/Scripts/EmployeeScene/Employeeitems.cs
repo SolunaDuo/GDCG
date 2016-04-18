@@ -17,12 +17,22 @@ public class Employeeitems : MonoBehaviour {
 
     public Text tRank;
 
+    public Text tName;
+    public Text tHp;
+    public Text tAbllity;
+
     public void SetMyInfo(Employeeitems temp)
     {
         isActive = temp.isActive;
         nNum = temp.nNum;
 
         StInfo = temp.StInfo;
+        if (tName != null && tHp != null && tAbllity != null)
+        {
+            tName.text = StInfo.Name;
+            tHp.text = StInfo.State1.ToString();
+            tAbllity.text = StInfo.State2.ToString();
+        }
 
         tRank.text = temp.nNum.ToString();
     }
@@ -36,5 +46,12 @@ public class Employeeitems : MonoBehaviour {
 
         }
             // 직원 뽑는 팝업 생성
+    }
+
+    public void OnSelectClick()
+    {
+        GameManager.instance.listMyEmp.Add(StInfo);
+        gameObject.SetActive(false);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
     }
 }
