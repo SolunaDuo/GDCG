@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager> {
 
     List<ST_GENRE> listGenre = new List<ST_GENRE>();
 
+    public List<ST_EMPLOYEE_INFO> listMyEmp = new List<ST_EMPLOYEE_INFO>();
+
     [SerializeField]
     private TextAsset jsonData;
     void Awake()

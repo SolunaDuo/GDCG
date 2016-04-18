@@ -22,7 +22,15 @@ public class Panel_Select : Singleton<Panel_Select>
 
             CreatSelectEmployee(temp);
         }
-        Enable(false);
+
+        for (int i = 0; i < 10; ++i)
+        {
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.RandomRange(1.0f,10.0f), Random.RandomRange(1.0f, 10.0f), 0.0f, 0.0f, 0, "Test");
+
+            SetSelectEmp(temp);
+        }
+
+        //Enable(false);
     }
 	
 	// Update is called once per frame
@@ -67,23 +75,25 @@ public class Panel_Select : Singleton<Panel_Select>
         tempobj.transform.parent = panel_grid.transform;
         tempobj.transform.localScale = Vector3.one;
         tempobj.transform.localPosition = Vector3.one;
-        listSelectEmployee.Add(Metemp);
+        listSelectEmployee.Add(tempobj.GetComponent<Employeeitems>());
 
         //패널 크기 세팅 필요
         tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * listSelectEmployee.Count));
         tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs((fItemHegit * listSelectEmployee.Count)) * 2f);
         //
+
+
     }
 
     public void SetSelectEmp(ST_EMPLOYEE_INFO temp)
     {
         for(int i=0; i< listSelectEmployee.Count;++i)
         {
-            if(!listSelectEmployee[i].isActive)
+            if( !listSelectEmployee[i].isActive && listSelectEmployee[i] != null )
             {
-                listSelectEmployee[i].gameObject.SetActive(true);
                 listSelectEmployee[i].isActive = true;
                 listSelectEmployee[i].StInfo = temp;
+                break;
             }
         }
     }
