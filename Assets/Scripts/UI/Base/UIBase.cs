@@ -7,6 +7,14 @@ using System;
 public class UIBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
 
+
+
+    protected const float dropDownWidth = 332.1f;
+    protected const float dropDownHeight = 40f;
+    protected const float dropDownPosX = 166.05f;
+    protected const float dropDownPosY = 0f;
+    protected const int Layer_UI = 5;
+
     protected struct TEMP_PLATFORMSTRING
     {
         public const string PLATFORM_PC = "PC";
@@ -59,5 +67,15 @@ public class UIBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         button.onClick.AddListener( action );
 
         return button;
+    }
+
+    protected void CreateDropDownMenu( string menuName, string containerName )
+    {
+        RectTransform container = GameObject.Find( containerName ).GetComponent<RectTransform>();
+
+        GameObject dropDownElement = new GameObject( menuName );
+        dropDownElement.transform.SetParent( container );
+        dropDownElement.layer = Layer_UI;
+
     }
 }
