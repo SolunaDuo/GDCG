@@ -33,11 +33,6 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     }
     // 코드 위치는 보기 좋은곳으로...
 
-
-    void Awake()
-    {
-    //    instance = this;
-    }
 	// Use this for initialization
 	void Start () {
         // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
@@ -47,13 +42,20 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
             SetMyEmployee(temp);
         }
-        gameObject.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Enable(false);
+    }
 
-	}
+    public void Enable(bool onoff)
+    {
+        if (onoff)
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+    }
 
     public void SetMyEmployee(ST_EMPLOYEE_INFO temp,bool bact = false)
     {
@@ -73,8 +75,8 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             listMyEmployee.Add(Metemp);
 
             //패널 크기 세팅 필요
-            tr_Grid.anchoredPosition = new Vector2(0.0f, (fItemHegit * listMyEmployee.Count) /2f);
-            tr_Grid.sizeDelta = new Vector2(0.0f, Mathf.Abs( (fItemHegit * listMyEmployee.Count)));
+            tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * listMyEmployee.Count) /2f);
+            tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs( (fItemHegit * listMyEmployee.Count)));
             //
         }
         else
