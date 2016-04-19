@@ -10,55 +10,57 @@ public class Panel_MessageBox : Singleton<Panel_MessageBox>
     private GameObject GameObj;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         tText = GetComponentInChildren<Text>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    public void Enable(bool onoff)
+    // Update is called once per frame
+    void Update()
     {
-        if(onoff)
+
+    }
+
+    public void Enable( bool onoff )
+    {
+        if ( onoff )
         {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3( 1.0f, 1.0f, 1.0f );
         }
         else
         {
-            transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            transform.localScale = new Vector3( 0.0f, 0.0f, 0.0f );
         }
     }
 
     // 함수를 실행시키지 않을꺼면 functionValue 를 ""로..
-    public void ShowMessage(string strMsg, string strmethod = "", GameObject gameobj = null)
+    public void ShowMessage( string strMsg, string strmethod = "", GameObject gameobj = null )
     {
-        Enable(true);
+        Enable( true );
         tText.text = strMsg;
 
-       // FunctionValue = functionvalue;
+        // FunctionValue = functionvalue;
         strMethod = strmethod;
         GameObj = gameobj;
     }
 
     public void OnOK()
     {
-        if (strMethod.Equals("") && GameObj == null)
+        if ( strMethod.Equals( "" ) && GameObj == null )
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive( false );
             return;
         }
 
-       //if (FunctionValue.Equals(""))
-            GameObj.SendMessage(strMethod);
-       /* else
-            GameObj.SendMessage(strMethod, FunctionValue);*/
+        //if (FunctionValue.Equals(""))
+        GameObj.SendMessage( strMethod );
+        /* else
+             GameObj.SendMessage(strMethod, FunctionValue);*/
     }
 
     public void OnNO()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive( false );
     }
 }
