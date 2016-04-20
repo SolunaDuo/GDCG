@@ -49,8 +49,8 @@ public class CoroutineManager : Singleton<CoroutineManager> {
 			Vector3 Temp;
 			if(elapsetime >= time )
 				elapsetime = time;
-			
-			Temp = startPos + (endPos - startPos) * (elapsetime/time);
+
+            Temp = startPos + (endPos - startPos) * (elapsetime/time);
 			go.transform.localPosition = Temp; 
 			
 			yield return new WaitForEndOfFrame ();
@@ -58,7 +58,7 @@ public class CoroutineManager : Singleton<CoroutineManager> {
 		go.transform.localPosition = endPos;
 	}
 
-	public IEnumerator objMove(GameObject go,Vector3 startPos, Vector3 endPos, float time)
+	public IEnumerator objMove<T>(GameObject go,Vector3 startPos, Vector3 endPos, float time, T temp ,string method = "", GameObject obj = null)
 	{
 		yield return new WaitForEndOfFrame ();
 		float elapsetime = 0.0f;

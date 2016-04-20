@@ -48,7 +48,7 @@ public class DataSaveLoad : Singleton<DataSaveLoad> {
         PlayerPrefs.SetString(szKey, Convert.ToBase64String(memoryStream.GetBuffer() ));
     }
 
-    public void LoadData<T>(List<T> temp,string szKey)
+    public void LoadData<T>(ref List<T> temp,string szKey)
     {
         string data = PlayerPrefs.GetString(szKey);
 

@@ -11,7 +11,8 @@ using System.Collections;
 
 public enum SOUNDIDX
 {
-    S_MAX = 0
+    S_CLICK = 0,
+    S_MAX 
 }
 
 public class Sound : Singleton<Sound> {
@@ -33,6 +34,8 @@ public class Sound : Singleton<Sound> {
         clips = new AudioClip[(int)SOUNDIDX.S_MAX];
 
         InitSound();
+
+        Sound.instance.PlayEff(SOUNDIDX.S_CLICK);
     }
 	
 	// Update is called once per frame
@@ -72,6 +75,5 @@ public class Sound : Singleton<Sound> {
 
     void InitSound()
     {
-
     }
 }

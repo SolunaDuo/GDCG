@@ -15,17 +15,21 @@ public class GameManager : Singleton<GameManager> {
 
     public List<ST_EMPLOYEE_INFO> listMyEmp = new List<ST_EMPLOYEE_INFO>();
 
+    public float MyMoney = 0.0f;
+    public float MoneyPlus = 0.0f; // 분당 들어오는 돈
+
     [SerializeField]
     private TextAsset jsonData;
     void Awake()
     {
-
+        
     }
 
     // Use this for initialization
     void Start () {
         LoadGameInfo();
-
+        DataSaveLoad.instance.LoadData(ref listMyEmp, "MyEmp");
+        Debug.Log(listMyEmp);
     }
 	
 	// Update is called once per frame
@@ -58,6 +62,13 @@ public class GameManager : Singleton<GameManager> {
         temp.Name = "null";
 
         return temp;
+    }
+
+    public void PlusMyMoney(float fplus)
+    {
+        MoneyPlus += fplus;
+
+        PlayerPrefs.SetFloat("MoneyPlus", MoneyPlus);
     }
     #endregion
 }

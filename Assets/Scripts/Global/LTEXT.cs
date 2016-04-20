@@ -7,6 +7,12 @@ using System.Collections.Generic;
 기능    : 텍스트를 읽어오는 스크립트
 */
 
+public enum LTEXTIDX
+{
+    T_BUY_EMPLOYEE = 0,
+
+    T_MAX,
+}
 public class LTEXT : MonoBehaviour {
 
     private static List<string> ltext = null;
@@ -56,15 +62,15 @@ public class LTEXT : MonoBehaviour {
         Init(szFile);
     }
 
-    public static string Get(int i)
+    public static string Get(LTEXTIDX i)
     {
         if (!bInit) return "null";
 
-        if(ltext.Count < i)
+        if(ltext.Count < (int)i)
         {
             return "null";
         }
 
-        return ltext[i];
+        return ltext[(int)i];
     }
 }

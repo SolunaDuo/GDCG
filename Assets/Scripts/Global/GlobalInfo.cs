@@ -41,7 +41,7 @@ public class ST_EMPLOYEE_INFO
     public float State3;
     public float State4;
 
-    public int Money;      // 연봉
+    public float Money;      // 연봉
     public string Name;    // 이름
 
 

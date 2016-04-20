@@ -37,7 +37,7 @@ public class Panel_Select : Singleton<Panel_Select>
 	void Update () {
 	if(Input.GetKeyDown(KeyCode.A))
         {
-            Panel_MessageBox.instance.ShowMessage("Test!!", "Set", gameObject);
+            Panel_Employee.instance.Enable(true);
         }
 	}
 
@@ -68,6 +68,7 @@ public class Panel_Select : Singleton<Panel_Select>
         Metemp.isActive = false;
         Metemp.nNum = listSelectEmployee.Count + 1;
         Metemp.StInfo = new ST_EMPLOYEE_INFO(temp);
+        Metemp.StInfo.Money = (Metemp.StInfo.State1 / 2f) + (Metemp.StInfo.State2 / 2f);
 
         // 프리팹 만들어줌
         GameObject tempobj = (GameObject)Instantiate(pfEmpItem);
@@ -96,5 +97,11 @@ public class Panel_Select : Singleton<Panel_Select>
                 break;
             }
         }
+    }
+
+    public void BuyEmp(ST_EMPLOYEE_INFO stinfo)
+    {
+        GameManager.instance.listMyEmp.Add(stinfo);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
     }
 }

@@ -50,8 +50,8 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnSelectClick()
     {
-        GameManager.instance.listMyEmp.Add(StInfo);
-        gameObject.SetActive(false);
-        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
+        //GameManager.instance.listMyEmp.Add(StInfo);
+        //DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
+        Panel_MessageBox.instance.ShowMessage(LTEXT.Get(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
     }
 }

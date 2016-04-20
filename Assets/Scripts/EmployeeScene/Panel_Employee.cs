@@ -26,13 +26,14 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     public RectTransform tr_Grid;
     private float fItemHegit = -100f;
 
+    public Animation anim;
+
     // 코드 위치는 보기 좋은곳으로...
     public Employeeitems GetEmployee( int index )
     {
         return listMyEmployee[ index ];
     }
     // 코드 위치는 보기 좋은곳으로...
-
 	// Use this for initialization
 	void Start () {
         // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
@@ -49,7 +50,8 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     {
         if (onoff)
         {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            gameObject.GetComponent<Animator>().Play("ShowPopup");
+            //transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         else
         {
@@ -72,7 +74,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             tempobj.transform.parent = panel_grid.transform;
             tempobj.transform.localScale = Vector3.one;
             tempobj.transform.localPosition = Vector3.one;
-            listMyEmployee.Add(Metemp);
+            listMyEmployee.Add(tempobj.GetComponent< Employeeitems>());
 
             //패널 크기 세팅 필요
             tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * listMyEmployee.Count) /2f);
@@ -116,5 +118,11 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         tStates[3].text = temp.StInfo.State4.ToString();
 
         tStates[4].text = temp.StInfo.Money.ToString();
+    }
+
+    public void AddEmp(ST_EMPLOYEE_INFO stinfo)
+    {
+        GameManager.instance.listMyEmp.Add(stinfo);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
     }
 }
