@@ -6,6 +6,13 @@
 기능    : 정보 구조체
 */
 
+public enum JOB
+{
+    J_PRO = 0,
+    J_GRAP,
+    J_PLANER,
+};
+
 // 게임이 가지고 있는 정보
 [Serializable]
 public class ST_GAME_INFO
@@ -44,8 +51,12 @@ public class ST_EMPLOYEE_INFO
     public float Money;      // 연봉
     public string Name;    // 이름
 
+    public JOB MyJob;
 
-    public ST_EMPLOYEE_INFO(float st1, float st2, float st3, float st4, int money, string name)
+    public int MyFaceidx;
+
+
+    public ST_EMPLOYEE_INFO(float st1, float st2, float st3, float st4, int money, string name, JOB myjob,int myfaceidx)
     {
         State1 = st1;
         State2 = st2;
@@ -53,6 +64,10 @@ public class ST_EMPLOYEE_INFO
 
         Money = money;
         Name = name;
+
+        MyJob = myjob;
+
+        MyFaceidx = myfaceidx;
     }
 
     public ST_EMPLOYEE_INFO(ST_EMPLOYEE_INFO temp)
@@ -63,5 +78,9 @@ public class ST_EMPLOYEE_INFO
 
         Money = temp.Money;
         Name = temp.Name;
+
+        MyJob = temp.MyJob;
+
+        MyFaceidx = temp.MyFaceidx;
     }
 }

@@ -36,13 +36,9 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     // 코드 위치는 보기 좋은곳으로...
 	// Use this for initialization
 	void Start () {
-        // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
-        for (int i=0; i<10; ++i)
-        {
-            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f,0.0f,0.0f,0.0f,0,"");
 
-            SetMyEmployee(temp);
-        }
+        ReSetMyEmpList();
+
         Enable(false);
     }
 
@@ -51,7 +47,6 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         if (onoff)
         {
             gameObject.GetComponent<Animator>().Play("ShowPopup");
-            //transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         else
         {
@@ -83,11 +78,29 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         }
         else
         {
-            for(int i=0; i< listMyEmployee.Count; ++i)
+            for(int i=0; i< GameManager.instance.listMyEmp.Count; ++i)
             {
                 if (!listMyEmployee[i].isActive)
                     listMyEmployee[i].SetMyInfo(Metemp);
             }
+        }
+    }
+
+    public void ReSetMyEmpList()
+    {
+        listMyEmployee.Clear();
+
+        // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
+        for (int i = 0; i < 10; ++i)
+        {
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "Test", (JOB)Random.Range(0, 3), 0);
+
+            SetMyEmployee(temp);
+        }
+
+        for (int i = 0; i < GameManager.instance.listMyEmp.Count; ++i)
+        {
+            SetMyEmployee(GameManager.instance.listMyEmp[i], true);
         }
     }
 
@@ -105,6 +118,18 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             }
             else
                 continue;
+        }
+    }
+    // 리스트중 한개만 추가
+    public void AddMyEmp(ST_EMPLOYEE_INFO temp)
+    {
+        for (int i = 0; i < listMyEmployee.Count; ++i)
+        {
+            if (!listMyEmployee[i].isActive)
+            {
+                listMyEmployee[i].SetMyInfo(temp);
+                return;
+            }
         }
     }
 

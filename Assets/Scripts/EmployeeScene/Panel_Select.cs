@@ -18,28 +18,21 @@ public class Panel_Select : Singleton<Panel_Select>
         // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
         for (int i = 0; i < 10; ++i)
         {
-            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "");
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "", (JOB)Random.Range(0, 3),0);
 
             CreatSelectEmployee(temp);
         }
 
         for (int i = 0; i < 10; ++i)
         {
-            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.RandomRange(1.0f,10.0f), Random.RandomRange(1.0f, 10.0f), 0.0f, 0.0f, 0, "Test");
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1,11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
+                (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
 
             SetSelectEmp(temp);
         }
 
-        //Enable(false);
+        Enable(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
-	if(Input.GetKeyDown(KeyCode.A))
-        {
-            Panel_Employee.instance.Enable(true);
-        }
-	}
 
     public void Enable(bool onoff)
     {
@@ -55,12 +48,12 @@ public class Panel_Select : Singleton<Panel_Select>
 
     void Set()
     {
-        ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "");
+        ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "", (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
         Panel_Employee.instance.gameObject.SetActive(true);
 
         Panel_Employee.instance.SetMyEmployee(temp,false);
     }
-
+    // 직원 리스트를 만들어줌
     public void CreatSelectEmployee(ST_EMPLOYEE_INFO temp)
     {
         Employeeitems Metemp = new Employeeitems();
@@ -79,13 +72,21 @@ public class Panel_Select : Singleton<Panel_Select>
         listSelectEmployee.Add(tempobj.GetComponent<Employeeitems>());
 
         //패널 크기 세팅 필요
-        tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * listSelectEmployee.Count));
-        tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs((fItemHegit * listSelectEmployee.Count)) * 2f);
+        if (listSelectEmployee.Count % 2 == 0)
+        {
+            tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * (listSelectEmployee.Count ) ));
+            tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs((fItemHegit * (listSelectEmployee.Count))) / 2f);
+        }
+        else
+        {
+            tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * (listSelectEmployee.Count + 1)));
+            tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs((fItemHegit * (listSelectEmployee.Count + 1))) / 2f);
+        }
         //
 
 
     }
-
+    // 만들어든 직원 리스트에 세팅을하는 부분
     public void SetSelectEmp(ST_EMPLOYEE_INFO temp)
     {
         for(int i=0; i< listSelectEmployee.Count;++i)
@@ -93,7 +94,8 @@ public class Panel_Select : Singleton<Panel_Select>
             if( !listSelectEmployee[i].isActive && listSelectEmployee[i] != null )
             {
                 listSelectEmployee[i].isActive = true;
-                listSelectEmployee[i].StInfo = temp;
+                listSelectEmployee[i].SetMyInfo(temp);
+                //listSelectEmployee[i].StInfo = temp;
                 break;
             }
         }
@@ -103,5 +105,16 @@ public class Panel_Select : Singleton<Panel_Select>
     {
         GameManager.instance.listMyEmp.Add(stinfo);
         DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
+    }
+
+    public void ChangeJob(int job)
+    {
+        for (int i = 0; i < 10; ++i)
+        {
+            listSelectEmployee[i].isActive = false;
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test", (JOB)job, EmployeeInfo.instance.GetRandomIdx());
+        
+            SetSelectEmp(temp);
+        }
     }
 }

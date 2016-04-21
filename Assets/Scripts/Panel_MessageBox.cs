@@ -25,7 +25,8 @@ public class Panel_MessageBox : Singleton<Panel_MessageBox>
     {
         if(onoff)
         {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            gameObject.GetComponent<Animator>().Play("ShowPopup");
+            //transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         else
         {

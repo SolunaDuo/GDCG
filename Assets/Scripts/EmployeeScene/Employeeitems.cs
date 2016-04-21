@@ -15,11 +15,10 @@ public class Employeeitems : MonoBehaviour {
 
     public ST_EMPLOYEE_INFO StInfo;
 
-    public Text tRank;
-
     public Text tName;
     public Text tHp;
     public Text tAbllity;
+    public Image iFace;
 
     public void SetMyInfo(Employeeitems temp)
     {
@@ -27,14 +26,23 @@ public class Employeeitems : MonoBehaviour {
         nNum = temp.nNum;
 
         StInfo = temp.StInfo;
-        if (tName != null && tHp != null && tAbllity != null)
-        {
-            tName.text = StInfo.Name;
-            tHp.text = StInfo.State1.ToString();
-            tAbllity.text = StInfo.State2.ToString();
-        }
+        tName.text = StInfo.Name;
+        tHp.text = StInfo.State1.ToString();
+        tAbllity.text = StInfo.State2.ToString();
 
-        tRank.text = temp.nNum.ToString();
+        if(!isActive )
+            iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.StInfo.MyFaceidx);
+    }
+
+    public void SetMyInfo(ST_EMPLOYEE_INFO temp)
+    {
+        StInfo = temp;
+
+        tName.text = temp.Name;
+        tHp.text = "체력 : " + temp.State1.ToString();
+        tAbllity.text = "역량 : " + temp.State2.ToString();
+
+        iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.MyFaceidx);
     }
 
     public void OnClick()
@@ -50,8 +58,6 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnSelectClick()
     {
-        //GameManager.instance.listMyEmp.Add(StInfo);
-        //DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
         Panel_MessageBox.instance.ShowMessage(LTEXT.Get(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
     }
 }

@@ -14,7 +14,6 @@ public class GameManager : Singleton<GameManager> {
     List<ST_GENRE> listGenre = new List<ST_GENRE>();
 
     public List<ST_EMPLOYEE_INFO> listMyEmp = new List<ST_EMPLOYEE_INFO>();
-
     public float MyMoney = 0.0f;
     public float MoneyPlus = 0.0f; // 분당 들어오는 돈
 
@@ -29,13 +28,7 @@ public class GameManager : Singleton<GameManager> {
     void Start () {
         LoadGameInfo();
         DataSaveLoad.instance.LoadData(ref listMyEmp, "MyEmp");
-        Debug.Log(listMyEmp);
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
     #region 
     // 장르
     void LoadGameInfo()
@@ -63,6 +56,7 @@ public class GameManager : Singleton<GameManager> {
 
         return temp;
     }
+    #endregion
 
     public void PlusMyMoney(float fplus)
     {
@@ -70,5 +64,4 @@ public class GameManager : Singleton<GameManager> {
 
         PlayerPrefs.SetFloat("MoneyPlus", MoneyPlus);
     }
-    #endregion
 }
