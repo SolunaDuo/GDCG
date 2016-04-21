@@ -24,21 +24,24 @@ public class Dropdown : UIBase
 
         UnityEngine.Events.UnityAction buttonAction = () => { DropDownMenuClick(); };
 
+        GameManager.instance.LoadJson();
+
         if ( gameObject.name.Contains( "Genre" ) )
         {
-            CreateDropDownMenu( transform, TEMP_GENRESTRING.GENRE_ACTION, "Container", buttonAction );
-            CreateDropDownMenu( transform, TEMP_GENRESTRING.GENRE_ARCADE, "Container", buttonAction );
-            CreateDropDownMenu( transform, TEMP_GENRESTRING.GENRE_BOARD, "Container", buttonAction );
-            CreateDropDownMenu( transform, TEMP_GENRESTRING.GENRE_PUZZLE, "Container", buttonAction );
-            CreateDropDownMenu( transform, TEMP_GENRESTRING.GENRE_ROLEPLAYING, "Container", buttonAction );
+            foreach ( var genreData in GameManager.instance.GetGenre() )
+            {
+                CreateDropDownMenu( transform, genreData.first, "Container", buttonAction );
+            }
         }
         else if ( gameObject.name.Contains( "Platform" ) )
         {
-            CreateDropDownMenu( transform, TEMP_PLATFORMSTRING.PLATFORM_PC, "Container", buttonAction );
-            CreateDropDownMenu( transform, TEMP_PLATFORMSTRING.PLATFORM_ANDROID, "Container", buttonAction );
-            CreateDropDownMenu( transform, TEMP_PLATFORMSTRING.PLATFORM_IOS, "Container", buttonAction );
+            foreach ( var platformData in GameManager.instance.GetPlatform() )
+            {
+                CreateDropDownMenu( transform, platformData, "Container", buttonAction );
+            }
         }
 
+        
     }
 
     // Update is called once per frame

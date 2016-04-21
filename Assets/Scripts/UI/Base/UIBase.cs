@@ -7,31 +7,11 @@ using System;
 
 public class UIBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-
-
-    #region For Test
-    protected const float dropDownWidth = 332.1f;
-    protected const float dropDownHeight = 40f;
-    protected const float dropDownPosX = 166.05f;
-    protected const float dropDownPosY = 0f;
-    protected const int Layer_UI = 5;
-
-    protected struct TEMP_PLATFORMSTRING
-    {
-        public const string PLATFORM_PC = "PC";
-        public const string PLATFORM_ANDROID = "Android";
-        public const string PLATFORM_IOS = "IOS";
-    }
-
-    protected struct TEMP_GENRESTRING
-    {
-        public const string GENRE_PUZZLE = "퍼즐";
-        public const string GENRE_BOARD = "보드";
-        public const string GENRE_ARCADE = "아케이드";
-        public const string GENRE_ROLEPLAYING = "롤플레잉";
-        public const string GENRE_ACTION = "액션";
-    }
-    #endregion
+    private const float dropDownWidth = 332.1f;
+    private const float dropDownHeight = 40f;
+    private const float dropDownPosX = 166.05f;
+    private const float dropDownPosY = 0f;
+    private const int Layer_UI = 5;
 
     public virtual void OnPointerClick( PointerEventData eventData )
     {
@@ -77,7 +57,6 @@ public class UIBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
         GameObject dropDownElement = new GameObject( menuName );
         dropDownElement.transform.SetParent( container );
-        dropDownElement.AddComponent<Elemennt>();
 
         dropDownElement.layer = Layer_UI;
 
@@ -119,9 +98,6 @@ public class UIBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         textTransform.anchorMin = new Vector2( 0, 0 );
         textTransform.anchorMax = new Vector2( 1, 1 );
         textTransform.pivot = new Vector2( 0.5f, 0.5f );
-        //textTransform.sizeDelta.Set( 0, 0 );
-        //textTransform.anchoredPosition3D = new Vector3( 0, 0, 0 );
-        //textTransform.anchoredPosition = new Vector2( 0, 0 );
         textTransform.offsetMin = new Vector2( 0, 0 );
         textTransform.offsetMax = new Vector2( 0, 0 );
         textTransform.localScale = new Vector3( 1, 1, 1 );
