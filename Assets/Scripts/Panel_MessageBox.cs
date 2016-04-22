@@ -11,7 +11,7 @@ public class Panel_MessageBox : Singleton<Panel_MessageBox>
 
     // Use this for initialization
     void Start () {
-        LTEXT.LoadText("Text\\TEXT_UI");
+        //LTEXT.LoadUIText("Text\\TEXT_UI");
         tText = GetComponentInChildren<Text>();
 
     }

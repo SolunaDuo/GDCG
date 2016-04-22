@@ -58,6 +58,6 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnSelectClick()
     {
-        Panel_MessageBox.instance.ShowMessage(LTEXT.Get(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
+        Panel_MessageBox.instance.ShowMessage(LTEXT.GetUI(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
     }
 }

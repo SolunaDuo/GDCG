@@ -53,37 +53,28 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
         }
     }
-
-    public void SetMyEmployee(ST_EMPLOYEE_INFO temp,bool bact = false)
+    // 내 직원 리스트 세팅 bact 가 flase일 경우에는 프리팹을 새로 만들어줌
+    // true일 경우에는 기본 프리팹에서 정보만 업데이트
+    public void CreatMyEmployee(ST_EMPLOYEE_INFO temp)
     {
         Employeeitems Metemp = new Employeeitems();
         // Employee Setting
-        Metemp.isActive = bact;
+        Metemp.isActive = false;
         Metemp.nNum = listMyEmployee.Count+1;
         Metemp.StInfo = new ST_EMPLOYEE_INFO(temp);
         // 프리팹 만들어줌
-        if (!bact)
-        {
-            GameObject tempobj = (GameObject)Instantiate(pfEmpItem);
-            tempobj.GetComponent<Employeeitems>().SetMyInfo(Metemp);
-            tempobj.transform.parent = panel_grid.transform;
-            tempobj.transform.localScale = Vector3.one;
-            tempobj.transform.localPosition = Vector3.one;
-            listMyEmployee.Add(tempobj.GetComponent< Employeeitems>());
+       
+        GameObject tempobj = (GameObject)Instantiate(pfEmpItem);
+        tempobj.GetComponent<Employeeitems>().SetMyInfo(Metemp);
+        tempobj.transform.parent = panel_grid.transform;
+        tempobj.transform.localScale = Vector3.one;
+        tempobj.transform.localPosition = Vector3.one;
+        listMyEmployee.Add(tempobj.GetComponent< Employeeitems>());
 
-            //패널 크기 세팅 필요
-            tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * listMyEmployee.Count) /2f);
-            tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs( (fItemHegit * listMyEmployee.Count)));
+        //패널 크기 세팅 필요
+        tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, (fItemHegit * listMyEmployee.Count) /2f);
+        tr_Grid.sizeDelta = new Vector2(tr_Grid.sizeDelta.x, Mathf.Abs( (fItemHegit * listMyEmployee.Count)));
             //
-        }
-        else
-        {
-            for(int i=0; i< GameManager.instance.listMyEmp.Count; ++i)
-            {
-                if (!listMyEmployee[i].isActive)
-                    listMyEmployee[i].SetMyInfo(Metemp);
-            }
-        }
     }
 
     public void ReSetMyEmpList()
@@ -95,12 +86,12 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         {
             ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "Test", (JOB)Random.Range(0, 3), 0);
 
-            SetMyEmployee(temp);
+            CreatMyEmployee(temp);
         }
 
         for (int i = 0; i < GameManager.instance.listMyEmp.Count; ++i)
         {
-            SetMyEmployee(GameManager.instance.listMyEmp[i], true);
+            AddMyEmp(GameManager.instance.listMyEmp[i]);
         }
     }
 
@@ -121,16 +112,17 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         }
     }
     // 리스트중 한개만 추가
-    public void AddMyEmp(ST_EMPLOYEE_INFO temp)
+    public bool AddMyEmp(ST_EMPLOYEE_INFO temp)
     {
         for (int i = 0; i < listMyEmployee.Count; ++i)
         {
             if (!listMyEmployee[i].isActive)
             {
                 listMyEmployee[i].SetMyInfo(temp);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     public void ShowInfo(Employeeitems temp)
@@ -148,6 +140,6 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     public void AddEmp(ST_EMPLOYEE_INFO stinfo)
     {
         GameManager.instance.listMyEmp.Add(stinfo);
-        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
     }
 }

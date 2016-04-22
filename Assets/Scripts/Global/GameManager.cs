@@ -28,10 +28,6 @@ public class GameManager : Singleton<GameManager> {
 
     [SerializeField]
     private TextAsset jsonData;
-    void Awake()
-    {
-        
-    }
 
     public void LoadJson()
     {
@@ -41,8 +37,11 @@ public class GameManager : Singleton<GameManager> {
 
     // Use this for initialization
     void Start() {
-        
-        DataSaveLoad.instance.LoadData( ref listMyEmp, "MyEmp" );
+
+        LTEXT.LoadUIText("Text\\TEXT_UI");
+        LTEXT.LoadKeyText("Text\\TEXT_Key");
+
+        DataSaveLoad.instance.LoadData( ref listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
     }
     #region 
     // 장르
@@ -119,6 +118,6 @@ public class GameManager : Singleton<GameManager> {
     {
         MoneyPlus += fplus;
 
-        PlayerPrefs.SetFloat("MoneyPlus", MoneyPlus);
+        PlayerPrefs.SetFloat(LTEXT.GetKey(KEYSTR.T_PLUSMONEY), MoneyPlus);
     }
 }

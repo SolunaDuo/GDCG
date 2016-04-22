@@ -46,13 +46,6 @@ public class Panel_Select : Singleton<Panel_Select>
         }
     }
 
-    void Set()
-    {
-        ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "", (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
-        Panel_Employee.instance.gameObject.SetActive(true);
-
-        Panel_Employee.instance.SetMyEmployee(temp,false);
-    }
     // 직원 리스트를 만들어줌
     public void CreatSelectEmployee(ST_EMPLOYEE_INFO temp)
     {
@@ -95,16 +88,42 @@ public class Panel_Select : Singleton<Panel_Select>
             {
                 listSelectEmployee[i].isActive = true;
                 listSelectEmployee[i].SetMyInfo(temp);
+                listSelectEmployee[i].gameObject.SetActive(true);
                 //listSelectEmployee[i].StInfo = temp;
                 break;
             }
         }
     }
 
-    public void BuyEmp(ST_EMPLOYEE_INFO stinfo)
+    public void BuyEmp(Employeeitems items)
     {
-        GameManager.instance.listMyEmp.Add(stinfo);
-        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, "MyEmp");
+        GameManager.instance.listMyEmp.Add(items.StInfo);
+        GameManager.instance.PlusMyMoney(items.StInfo.Money);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+        
+        // 해당 직원 삭제
+        DeleteEmployee(items);
+        // 직원 다시 복구
+        ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
+               (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
+        SetSelectEmp(temp);
+    }
+
+    public void DeleteEmployee(Employeeitems temp)
+    {
+        for (int i = 0; i < listSelectEmployee.Count; ++i)
+        {
+            if (listSelectEmployee[i].isActive)
+            {
+                if (temp.nNum == listSelectEmployee[i].nNum)
+                {
+                    listSelectEmployee[i].isActive = false;
+                    listSelectEmployee[i].gameObject.SetActive(false);
+                }
+            }
+            else
+                continue;
+        }
     }
 
     public void ChangeJob(int job)

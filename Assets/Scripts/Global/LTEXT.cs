@@ -13,24 +13,48 @@ public enum LTEXTIDX
 
     T_MAX,
 }
+
+public enum KEYSTR
+{
+    K_EMP = 0,
+    T_PLUSMONEY,
+
+    K_MAX
+}
 public class LTEXT : MonoBehaviour {
 
     private static List<string> ltext = null;
+    private static List<string> KeyText = null;
 
     private static bool bInit = false;
 
-    private static void Init(string szFile)
+    private static void Init(string szFile,int loadidx = 0)
     {
         TextAsset texAsst = (TextAsset)Resources.Load(szFile);
 
-        if(ltext == null)
+        if (loadidx == 0)
         {
-            ltext = new List<string>();
+            if (ltext == null)
+            {
+                ltext = new List<string>();
+            }
+            else
+            {
+                ltext.Clear();
+                bInit = false;
+            }
         }
-        else
+        else if (loadidx == 1)
         {
-            ltext.Clear();
-            bInit = false;
+            if (KeyText == null)
+            {
+                KeyText = new List<string>();
+            }
+            else
+            {
+                KeyText.Clear();
+                bInit = false;
+            }
         }
 
         if (texAsst != null)
@@ -43,26 +67,44 @@ public class LTEXT : MonoBehaviour {
             {
                 char[] charsplit2 = new char[] { ',', '\t' };
                 string[] token2 = token1[i].Split(charsplit2, System.StringSplitOptions.RemoveEmptyEntries);
-
-                if (token2 != null)
+                if (loadidx == 0)
                 {
-                    ltext.Add(token2[1]);
+                    if (token2 != null)
+                    {
+                        ltext.Add(token2[1]);
+                    }
+                    else
+                    {
+                        ltext.Add("null");
+                    }
                 }
-                else
+                else if(loadidx == 1)
                 {
-                    ltext.Add("null");
+                    if (token2 != null)
+                    {
+                        KeyText.Add(token2[1]);
+                    }
+                    else
+                    {
+                        KeyText.Add("null");
+                    }
                 }
             }   
         }
         bInit = true;
     }
 
-    public static void LoadText(string szFile)
+    public static void LoadUIText(string szFile)
     {
-        Init(szFile);
+        Init(szFile,0);
     }
 
-    public static string Get(LTEXTIDX i)
+    public static void LoadKeyText(string szFile)
+    {
+        Init(szFile,1);
+    }
+
+    public static string GetUI(LTEXTIDX i)
     {
         if (!bInit) return "null";
 
@@ -72,5 +114,17 @@ public class LTEXT : MonoBehaviour {
         }
 
         return ltext[(int)i];
+    }
+
+    public static string GetKey(KEYSTR i)
+    {
+        if (!bInit) return "null";
+
+        if (KeyText.Count < (int)i)
+        {
+            return "null";
+        }
+
+        return KeyText[(int)i];
     }
 }
