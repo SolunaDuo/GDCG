@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
 
         LTEXT.LoadUIText("Text\\TEXT_UI");
         LTEXT.LoadKeyText("Text\\TEXT_Key");

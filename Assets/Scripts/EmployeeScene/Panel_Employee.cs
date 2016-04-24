@@ -24,9 +24,11 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     public Text[] tStates;
 
     public RectTransform tr_Grid;
-    private float fItemHegit = -100f;
 
-    public Animation anim;
+    [SerializeField]
+    private Image iFace;
+
+    private float fItemHegit = -100f;
 
     // 코드 위치는 보기 좋은곳으로...
     public Employeeitems GetEmployee( int index )
@@ -118,6 +120,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         {
             if (!listMyEmployee[i].isActive)
             {
+                listMyEmployee[i].isActive = true;
                 listMyEmployee[i].SetMyInfo(temp);
                 return true;
             }
@@ -135,6 +138,8 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         tStates[3].text = temp.StInfo.State4.ToString();
 
         tStates[4].text = temp.StInfo.Money.ToString();
+
+        iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.StInfo.MyFaceidx);
     }
 
     public void AddEmp(ST_EMPLOYEE_INFO stinfo)

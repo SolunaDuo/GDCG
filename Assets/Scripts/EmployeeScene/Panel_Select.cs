@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class Panel_Select : Singleton<Panel_Select>
 {
-    List<Employeeitems> listSelectEmployee = new List<Employeeitems>();  // 직원 리스트
+    List<Employeeitems> listSelectEmployee = new List<Employeeitems>();  // 직원 리스트(현재 보여지는 실제 게임 오브젝트)
+
+    List<ST_EMPLOYEE_INFO> listSelectEmployee_01 = new List<ST_EMPLOYEE_INFO>();  // 프로그래밍 직원 리스트
+    List<ST_EMPLOYEE_INFO> listSelectEmployee_02 = new List<ST_EMPLOYEE_INFO>();  // 그래픽 직원 리스트
+    List<ST_EMPLOYEE_INFO> listSelectEmployee_03 = new List<ST_EMPLOYEE_INFO>();  // 기획 직원 리스트
 
     public GameObject pfEmpItem;
     public GameObject panel_grid;
@@ -18,17 +22,15 @@ public class Panel_Select : Singleton<Panel_Select>
         // 직원 리스트 초기화, 후에 직원 최대 값으로 변경
         for (int i = 0; i < 10; ++i)
         {
-            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "", (JOB)Random.Range(0, 3),0);
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
+                                     (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
 
             CreatSelectEmployee(temp);
         }
 
         for (int i = 0; i < 10; ++i)
         {
-            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1,11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
-                (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
-
-            SetSelectEmp(temp);
+            SetSelectEmp(listSelectEmployee[i].StInfo, 0);
         }
 
         Enable(false);
@@ -38,7 +40,7 @@ public class Panel_Select : Singleton<Panel_Select>
     {
         if (onoff)
         {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            gameObject.GetComponent<Animator>().Play("ShowPopup");
         }
         else
         {
@@ -80,9 +82,16 @@ public class Panel_Select : Singleton<Panel_Select>
 
     }
     // 만들어든 직원 리스트에 세팅을하는 부분
-    public void SetSelectEmp(ST_EMPLOYEE_INFO temp)
+    public void SetSelectEmp(ST_EMPLOYEE_INFO temp,int job)
     {
-        for(int i=0; i< listSelectEmployee.Count;++i)
+        if (job == 0)
+            SetEmpData(ref listSelectEmployee_01, temp);
+        else if (job == 1)
+            SetEmpData(ref listSelectEmployee_02, temp);
+        else if (job == 2)
+            SetEmpData(ref listSelectEmployee_03, temp);
+
+        for (int i=0; i< listSelectEmployee.Count;++i)
         {
             if( !listSelectEmployee[i].isActive && listSelectEmployee[i] != null )
             {
@@ -95,22 +104,15 @@ public class Panel_Select : Singleton<Panel_Select>
         }
     }
 
-    public void BuyEmp(Employeeitems items)
+    public void DeleteEmployee(Employeeitems temp,int job)
     {
-        GameManager.instance.listMyEmp.Add(items.StInfo);
-        GameManager.instance.PlusMyMoney(items.StInfo.Money);
-        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
-        
-        // 해당 직원 삭제
-        DeleteEmployee(items);
-        // 직원 다시 복구
-        ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
-               (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
-        SetSelectEmp(temp);
-    }
+        if (job == 0)
+            DeleteEmpData(ref listSelectEmployee_01, temp.StInfo);
+        else if (job == 1)
+            DeleteEmpData(ref listSelectEmployee_02, temp.StInfo);
+        else if (job == 2)
+            DeleteEmpData(ref listSelectEmployee_03, temp.StInfo);
 
-    public void DeleteEmployee(Employeeitems temp)
-    {
         for (int i = 0; i < listSelectEmployee.Count; ++i)
         {
             if (listSelectEmployee[i].isActive)
@@ -125,15 +127,76 @@ public class Panel_Select : Singleton<Panel_Select>
                 continue;
         }
     }
+    //
+
+    public void BuyEmp(Employeeitems items)
+    {
+        // 해당 직원 삭제
+        DeleteEmployee(items,(int)items.StInfo.MyJob);
+        // 직원 다시 복구
+        ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
+               (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
+        SetSelectEmp(temp, (int)items.StInfo.MyJob);
+
+        GameManager.instance.listMyEmp.Add(items.StInfo);
+        GameManager.instance.PlusMyMoney(items.StInfo.Money);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+    }
 
     public void ChangeJob(int job)
     {
+        // 초기화 안됐을 경우 초기화 시켜줌
+        if (listSelectEmployee_01.Count == 0)
+        {
+            ReSetEmpData(ref listSelectEmployee_01, 0);
+        }
+        if (listSelectEmployee_02.Count == 0)
+        {
+            ReSetEmpData(ref listSelectEmployee_02, 0);
+        }
+        if (listSelectEmployee_03.Count == 0)
+        {
+            ReSetEmpData(ref listSelectEmployee_03, 0);
+        }
+
         for (int i = 0; i < 10; ++i)
         {
             listSelectEmployee[i].isActive = false;
-            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test", (JOB)job, EmployeeInfo.instance.GetRandomIdx());
-        
-            SetSelectEmp(temp);
+
+            if (job == 0)
+            {
+                SetSelectEmp(listSelectEmployee_01[i], 0);
+            }
+            else if (job == 1)
+            {
+                SetSelectEmp(listSelectEmployee_02[i], 1);
+            }
+            else if (job == 2)
+            {
+                SetSelectEmp(listSelectEmployee_03[i], 2);
+            }
         }
+    }
+
+    void ReSetEmpData(ref List<ST_EMPLOYEE_INFO> templist,int job)
+    {
+        templist.Clear();
+        for (int i = 0; i < 10; ++i)
+        {
+            ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
+                                    (JOB)job, EmployeeInfo.instance.GetRandomIdx());
+
+            templist.Add(temp);
+        }
+    }
+
+    void SetEmpData(ref List<ST_EMPLOYEE_INFO> templist, ST_EMPLOYEE_INFO temp)
+    {
+        templist.Add(temp);
+    }
+
+    void DeleteEmpData(ref List<ST_EMPLOYEE_INFO> templist, ST_EMPLOYEE_INFO temp)
+    {
+        templist.Remove(temp);
     }
 }

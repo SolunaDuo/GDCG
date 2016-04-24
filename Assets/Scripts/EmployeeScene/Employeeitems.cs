@@ -30,7 +30,7 @@ public class Employeeitems : MonoBehaviour {
         tHp.text = StInfo.State1.ToString();
         tAbllity.text = StInfo.State2.ToString();
 
-        if(!isActive )
+        //if(!isActive )
             iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.StInfo.MyFaceidx);
     }
 
@@ -58,6 +58,7 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnSelectClick()
     {
-        Panel_MessageBox.instance.ShowMessage(LTEXT.GetUI(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
+        Panel_Select.instance.BuyEmp(this);
+        //Panel_MessageBox.instance.ShowMessage(LTEXT.GetUI(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
     }
 }
