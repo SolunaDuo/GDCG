@@ -40,11 +40,13 @@ public class Panel_Select : Singleton<Panel_Select>
     {
         if (onoff)
         {
+            ChangeJob(0);
+            tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, -250f);
             gameObject.GetComponent<Animator>().Play("ShowPopup");
         }
         else
         {
-            transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            gameObject.GetComponent<Animator>().Play("idle");
         }
     }
 
@@ -131,16 +133,16 @@ public class Panel_Select : Singleton<Panel_Select>
 
     public void BuyEmp(Employeeitems items)
     {
+        GameManager.instance.listMyEmp.Add(items.StInfo);
+        GameManager.instance.PlusMyMoney(items.StInfo.Money);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+
         // 해당 직원 삭제
         DeleteEmployee(items,(int)items.StInfo.MyJob);
         // 직원 다시 복구
         ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
                (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
         SetSelectEmp(temp, (int)items.StInfo.MyJob);
-
-        GameManager.instance.listMyEmp.Add(items.StInfo);
-        GameManager.instance.PlusMyMoney(items.StInfo.Money);
-        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
     }
 
     public void ChangeJob(int job)
@@ -176,6 +178,7 @@ public class Panel_Select : Singleton<Panel_Select>
                 SetSelectEmp(listSelectEmployee_03[i], 2);
             }
         }
+        tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, -250f);
     }
 
     void ReSetEmpData(ref List<ST_EMPLOYEE_INFO> templist,int job)

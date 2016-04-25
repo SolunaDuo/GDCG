@@ -30,6 +30,7 @@ public class Employeeitems : MonoBehaviour {
         tHp.text = StInfo.State1.ToString();
         tAbllity.text = StInfo.State2.ToString();
 
+        StInfo.Money = (StInfo.State1 / 2f) + (StInfo.State2 / 2f) + (StInfo.State3 / 2f) + (StInfo.State4 / 2f);
         //if(!isActive )
             iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.StInfo.MyFaceidx);
     }
@@ -37,7 +38,7 @@ public class Employeeitems : MonoBehaviour {
     public void SetMyInfo(ST_EMPLOYEE_INFO temp)
     {
         StInfo = temp;
-
+        StInfo.Money = (temp.State1 / 2f) + (temp.State2 / 2f) + (temp.State3 / 2f) + (temp.State4 / 2f);
         tName.text = temp.Name;
         tHp.text = "체력 : " + temp.State1.ToString();
         tAbllity.text = "역량 : " + temp.State2.ToString();
@@ -58,7 +59,7 @@ public class Employeeitems : MonoBehaviour {
 
     public void OnSelectClick()
     {
-        Panel_Select.instance.BuyEmp(this);
+        Panel_Select.instance.BuyEmp(GetComponent<Employeeitems>());
         //Panel_MessageBox.instance.ShowMessage(LTEXT.GetUI(LTEXTIDX.T_BUY_EMPLOYEE), "BuyEmp", Panel_Select.instance.gameObject);
     }
 }

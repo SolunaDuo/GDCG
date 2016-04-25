@@ -48,6 +48,11 @@ public class ST_EMPLOYEE_INFO
     public float State3;
     public float State4;
 
+    public float MaxState1;   // 스테이스 4개 max값.. 처음 초기화 하고 변하지 않음
+    public float MaxState2;
+    public float MaxState3;
+    public float MaxState4;
+
     public float Money;      // 연봉
     public string Name;    // 이름
 
@@ -61,6 +66,12 @@ public class ST_EMPLOYEE_INFO
         State1 = st1;
         State2 = st2;
         State3 = st3;
+        State4 = st4;
+
+        MaxState1 = st1;
+        MaxState2 = st2;
+        MaxState3 = st3;
+        MaxState4 = st4;
 
         Money = money;
         Name = name;
@@ -75,6 +86,12 @@ public class ST_EMPLOYEE_INFO
         State1 = temp.State1;
         State2 = temp.State2;
         State3 = temp.State3;
+        State4 = temp.State4;
+
+        MaxState1 = temp.State1;
+        MaxState2 = temp.State2;
+        MaxState3 = temp.State3; 
+        MaxState4 = temp.State4;
 
         Money = temp.Money;
         Name = temp.Name;

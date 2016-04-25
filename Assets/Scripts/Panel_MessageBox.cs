@@ -30,7 +30,7 @@ public class Panel_MessageBox : Singleton<Panel_MessageBox>
         }
         else
         {
-            transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            gameObject.GetComponent<Animator>().Play("idle");
         }
     }
 

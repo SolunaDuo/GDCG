@@ -41,7 +41,23 @@ public class GameManager : Singleton<GameManager> {
         LTEXT.LoadUIText("Text\\TEXT_UI");
         LTEXT.LoadKeyText("Text\\TEXT_Key");
 
-        DataSaveLoad.instance.LoadData( ref listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+        DataSaveLoad.instance.LoadData(ref listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+    }
+
+   void Start()
+    {
+        Panel_AllEmployee.instance.SetAll();
+        Panel_AllEmployee.instance.SetCur();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            //Panel_Employee.instance.Enable(false);
+            listMyEmp.Clear();
+            DataSaveLoad.instance.SaveData(listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+        }
     }
     #region 
     // 장르

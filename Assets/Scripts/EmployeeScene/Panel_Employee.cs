@@ -39,7 +39,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 	// Use this for initialization
 	void Start () {
 
-        ReSetMyEmpList();
+        InitMyEmpList();
 
         Enable(false);
     }
@@ -48,11 +48,13 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     {
         if (onoff)
         {
+            ReSetEmpData();
+            tr_Grid.anchoredPosition = new Vector2(tr_Grid.anchoredPosition.x, -500f);
             gameObject.GetComponent<Animator>().Play("ShowPopup");
         }
         else
         {
-            transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            gameObject.GetComponent<Animator>().Play("idle");
         }
     }
     // 내 직원 리스트 세팅 bact 가 flase일 경우에는 프리팹을 새로 만들어줌
@@ -79,7 +81,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             //
     }
 
-    public void ReSetMyEmpList()
+    public void InitMyEmpList()
     {
         listMyEmployee.Clear();
 
@@ -97,6 +99,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         }
     }
 
+    // 한개만 삭제
     public void DeleteEmployee(ST_EMPLOYEE_INFO temp)
     {
         for(int i=0; i< listMyEmployee.Count;++i)
@@ -106,7 +109,6 @@ public class Panel_Employee : Singleton<Panel_Employee> {
                 if (temp.Name.Equals(listMyEmployee[i].StInfo.Name))
                 {
                     listMyEmployee[i].isActive = false;
-                    listMyEmployee.Remove(listMyEmployee[i]);
                 }
             }
             else
@@ -126,6 +128,23 @@ public class Panel_Employee : Singleton<Panel_Employee> {
             }
         }
         return false;
+    }
+    // 안에 있는 데이터만 삭제
+    void ReSetEmpData()
+    {
+        for (int i = 0; i < listMyEmployee.Count; ++i)
+        {
+            listMyEmployee[i].isActive = false;
+        }
+
+        for (int i = 0; i < GameManager.instance.listMyEmp.Count; ++i)
+        {
+            if (!listMyEmployee[i].isActive)
+            {
+                listMyEmployee[i].isActive = true;
+                listMyEmployee[i].SetMyInfo(GameManager.instance.listMyEmp[i]);
+            }
+        }
     }
 
     public void ShowInfo(Employeeitems temp)
