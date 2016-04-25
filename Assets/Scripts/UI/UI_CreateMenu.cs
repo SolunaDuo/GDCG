@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-public class UIMenu : UIBase
+public class UI_CreateMenu : UIBase
 {
 
     private Button btnChar;
@@ -15,12 +17,15 @@ public class UIMenu : UIBase
     [SerializeField]
     private bool gameMenuFLAG = false;
 
+    private List<GameObject> createSequence = new List<GameObject>();
+
     // Use this for initialization
     void Awake()
     {
         btnChar = AddListener( "Char", () => { CharacterButton(); } );
         btnManage = AddListener( "BtnManage", () => { ManageButton(); } ).gameObject;
         btnCreate = AddListener( "BtnCreate", () => { CreateButton(); } ).gameObject;
+        AddListener( "BtnNext", () => { Create_nextStep(); } );
         btnManage.SetActive( gameMenuFLAG );
         btnCreate.SetActive( gameMenuFLAG );
 
@@ -52,5 +57,10 @@ public class UIMenu : UIBase
         btnManage.SetActive( false );
         btnCreate.SetActive( false );
         createPanel.SetActive( true );
+    }
+
+    private void Create_nextStep()
+    {
+
     }
 }
