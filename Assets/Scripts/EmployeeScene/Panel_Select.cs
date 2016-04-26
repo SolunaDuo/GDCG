@@ -23,7 +23,7 @@ public class Panel_Select : Singleton<Panel_Select>
         for (int i = 0; i < 10; ++i)
         {
             ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
-                                     (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
+                                     JOB.J_PRO, EmployeeInfo.instance.GetRandomIdx());
 
             CreatSelectEmployee(temp);
         }
@@ -141,7 +141,7 @@ public class Panel_Select : Singleton<Panel_Select>
         DeleteEmployee(items,(int)items.StInfo.MyJob);
         // 직원 다시 복구
         ST_EMPLOYEE_INFO temp = new ST_EMPLOYEE_INFO(Random.Range(1, 11), Random.Range(1, 11), 0.0f, 0.0f, 0, "Test",
-               (JOB)Random.Range(0, 3), EmployeeInfo.instance.GetRandomIdx());
+               items.StInfo.MyJob, EmployeeInfo.instance.GetRandomIdx());
         SetSelectEmp(temp, (int)items.StInfo.MyJob);
     }
 
@@ -154,11 +154,11 @@ public class Panel_Select : Singleton<Panel_Select>
         }
         if (listSelectEmployee_02.Count == 0)
         {
-            ReSetEmpData(ref listSelectEmployee_02, 0);
+            ReSetEmpData(ref listSelectEmployee_02, 1);
         }
         if (listSelectEmployee_03.Count == 0)
         {
-            ReSetEmpData(ref listSelectEmployee_03, 0);
+            ReSetEmpData(ref listSelectEmployee_03, 2);
         }
 
         for (int i = 0; i < 10; ++i)

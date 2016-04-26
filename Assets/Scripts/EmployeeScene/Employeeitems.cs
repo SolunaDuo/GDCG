@@ -46,6 +46,17 @@ public class Employeeitems : MonoBehaviour {
         iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.MyFaceidx);
     }
 
+    public void ReSetInfo()
+    {
+        StInfo = new ST_EMPLOYEE_INFO(0.0f, 0.0f, 0.0f, 0.0f, 0, "Empty", JOB.J_PRO, 0);
+
+        tName.text = StInfo.Name;
+        tHp.text = StInfo.State1.ToString();
+        tAbllity.text = StInfo.State2.ToString();
+
+        iFace.sprite = EmployeeInfo.instance.GetEmpFace(0);
+    }
+
     public void OnClick()
     {
         if(isActive)

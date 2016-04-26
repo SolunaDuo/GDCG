@@ -30,6 +30,8 @@ public class Panel_Employee : Singleton<Panel_Employee> {
 
     private float fItemHegit = -100f;
 
+    private int nSeleteNum = -1;
+
     // 코드 위치는 보기 좋은곳으로...
     public Employeeitems GetEmployee( int index )
     {
@@ -100,15 +102,16 @@ public class Panel_Employee : Singleton<Panel_Employee> {
     }
 
     // 한개만 삭제
-    public void DeleteEmployee(ST_EMPLOYEE_INFO temp)
+    public void DeleteEmployee(int nNum)
     {
         for(int i=0; i< listMyEmployee.Count;++i)
         {
             if (listMyEmployee[i].isActive)
             {
-                if (temp.Name.Equals(listMyEmployee[i].StInfo.Name))
+                if (listMyEmployee[i].nNum == nNum)
                 {
                     listMyEmployee[i].isActive = false;
+                    listMyEmployee[i].ReSetInfo();
                 }
             }
             else
@@ -135,6 +138,7 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         for (int i = 0; i < listMyEmployee.Count; ++i)
         {
             listMyEmployee[i].isActive = false;
+            listMyEmployee[i].ReSetInfo();
         }
 
         for (int i = 0; i < GameManager.instance.listMyEmp.Count; ++i)
@@ -159,11 +163,21 @@ public class Panel_Employee : Singleton<Panel_Employee> {
         tStates[4].text = temp.StInfo.Money.ToString();
 
         iFace.sprite = EmployeeInfo.instance.GetEmpFace(temp.StInfo.MyFaceidx);
+
+        nSeleteNum = temp.nNum;
     }
 
     public void AddEmp(ST_EMPLOYEE_INFO stinfo)
     {
         GameManager.instance.listMyEmp.Add(stinfo);
         DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+    }
+
+    public void Fire()
+    {
+        DeleteEmployee(nSeleteNum);
+        GameManager.instance.listMyEmp.RemoveAt(nSeleteNum-1);
+        DataSaveLoad.instance.SaveData(GameManager.instance.listMyEmp, LTEXT.GetKey(KEYSTR.K_EMP));
+        ReSetEmpData();
     }
 }
